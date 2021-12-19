@@ -1,0 +1,16 @@
+config:
+  target: "ws://<server_ip>:3000"
+  socketio:
+    transports: ["websocket"]
+  engines:
+    socketio-v3: {}
+  phases:
+    - duration: "240" # generate 20k users in 240 seconds
+      arrivalCount: "20000" # 20k concurrent users
+scenarios:
+  - engine: socketio-v3
+    flow:
+      - name: My Socket.IO test
+        loop:
+          - think: "300" # sleep 300 seconds after connected
+        count: "1" # loop 1 time
